@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamento Intermedios</title>
+</head>
+<body>
+    <script>
+        console.log("1. Sigma - Implementa una función sigma(num) que, dado un número, devuelve la suma de todos los enteros positivos (incluyendo el número dado). Ej: sigma(3) = 6 (1+2+3); sigma(5) = 15 (1+2+3+4+5).");
+        function sigma(num){
+            var sum = 0;
+            for(var i=1; i<=num; i++){
+                sum+=i;
+            }
+            return sum;
+        }
+        var nroSigma = 5;
+        resSigma = sigma(nroSigma);
+        console.log("Sigma("+nroSigma+"): "+resSigma);
+        //-------------------------------
+        console.log("2. Factorial - Escribe una función factorial(num) que, dado un número, devuelva el producto (multiplicación) de todos los enteros positivos (incluyendo el número dado). Por ejemplo: factorial(3) = 6 (1*2*3); factorial(5) = 120 (1*2*3*4*5).");
+        function factorial(num){
+            var multi = 1;
+            for(var i=1; i<=num; i++){
+                multi = multi * i;
+            }
+            return multi;
+        }
+        var nroFactorial = 5;
+        resFactorial = factorial(nroFactorial);
+        console.log("Factorial("+nroFactorial+"): "+resFactorial);
+        //-------------------------------
+        console.log("3. Fibonacci - Crea una función para generar números de Fibonacci. En esta famosa secuencia matemática, cada número es la suma de las dos anteriores, partiendo con los valores 0 y 1. Tu función debería aceptar un argumento, un índice en la secuencia (donde 0 corresponde al valor inicial, 4 corresponden al valor cuatro más tarde, etc). Ejemplos: fibonacci(0) = 0 (dado), fibonacci(1) = 1 (dado), fibonacci(2) = 1 (fib(0)+fib(1), o 0+1), fibonacci(3) = 2 (fib(1) + fib(2)3, o 1+1), fibonacci(4) = 3 (1+2), fibonacci(5) = 5 (2+3), fibonacci(6) = 8 (3+5), fibonacci(7) = 13 (5+8). Haz esto primero sin usar recursión. Si no sabes qué es una recursión, no te preocupes puesto que vamos a introducir este concepto en la Parte 2 de esta actividad.");
+        function fibonacci(f){
+            var fib = [0,1];
+            if(f==0 || f==1){
+                return fib[f];
+            }else{
+                for(var i=2; i<=f; i++){
+                    fib[i] = fib[i-1] + fib[i-2];
+                }
+                return fib[fib.length-1];
+            }           
+        }
+        var nroFib = 7;
+        fib = fibonacci(nroFib);
+        console.log("Fibonacci("+nroFib+"): "+fib);   
+        //-------------------------------
+        console.log("4. Array: Penúltimo: Devuelve el penúltimo elemento del array. Dado [42,true,4,”Liam”, 7] devuelve “Liam”. Si el array es muy pequeño, devuelve null.");    
+        function penultimo(a){
+            if(a.length>1){
+                return a[a.length-2];
+            }else{
+                return null;
+            }
+        }
+        pen = penultimo([42,true,4,"Liam",7]);
+        console.log("El penultimo valor del arreglo es: "+pen);
+        pen = penultimo(["Juan"]);
+        console.log("El penultimo valor del arreglo es: "+pen);
+        //-------------------------------
+        console.log("5. Array: “N” último: Devuelve el elemento “N” último. Dado ([5,2,3,6,4,9,7],3], devuelve 4. Si el array es muy pequeño, devuelve null.");
+        function nUltimo(array,ultimo){
+            var posUltimo = 0;
+            if(array.length>ultimo){
+                posUltimo = array[array.length-ultimo];
+                return posUltimo;
+            }else{
+                return null;
+            }
+        }
+        ultimo = nUltimo([5,2,3,6,4,9,7],3);
+        console.log("N ultimo es :"+ultimo);
+        ultimo = nUltimo([1,2,3]);
+        console.log("N ultimo es :"+ultimo);
+        //-------------------------------
+        console.log("6. Array: Segundo más grande: Devuelve el segundo elemento más grande de un array. Dado [42,1,4,3.14,7], devuelve 7.  Si el array es muy pequeño, devuelve null.");
+        function segundoMayor(arr){
+            if(arr.length>1){
+                var aux, mayor2;
+                for(var i=0; i<arr.length; i++){
+                    for(var j=0; j<arr.length-i; j++){
+                        if(arr[j] > arr[j+1]){
+                            aux = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = aux;
+                        }
+                    } 
+                }
+                mayor2 = arr[arr.length-2];
+                return mayor2;
+            }else{
+                return null;
+            }
+        }
+        mayor = segundoMayor([42,1,4,3.14,7]);
+        console.log("El segundo valor mas grande del arreglo es: "+mayor);
+        mayor = segundoMayor([38]);
+        console.log("El segundo valor mas grande del arreglo es: "+mayor);
+        //-------------------------------
+        console.log("7. Doble Problema Par: Crea una función que cambie un array dado duplicando cada uno de sus elementos en una posición par, y manteniendo el orden original. Convierte [4, 'Ulysses', 42, false]   a    [4,4, 'Ulysses' , 42, 42, false]."); 
+        function posParDoble(x){
+            var arr = [];
+            for(var i=0; i<x.length; i++){
+                if(i%2==0){
+                    arr.push(x[i],x[i]);
+                }else{
+                    arr.push(x[i]);
+                }
+            }
+            return arr;
+        }
+        arrayParDoble = posParDoble([4, 'Ulysses', 42, false]);
+        console.log(arrayParDoble);
+    </script>    
+</body>
+</html>
