@@ -78,24 +78,28 @@
         //-------------------------------
         console.log("6. Pares e Impares - Crea una función que acepte un array. Cada vez que ese array tenga 3 valores impares seguidos, imprime (print) “¡Qué imparcial!”, y cada vez que tenga 3 pares seguidos, imprime (print) “¡Es para bien!”.");
         function parImpar(a){
-            var impares = 0, pares = 0; 
+            var count = 1, paridadActual = "", paridadAnterior ="";  
             for(var i=0; i<a.length; i++){
                 if(a[i]%2==0){
-                    pares++;
-                    if(pares == 3){
+                    paridadActual = "PAR";
+                }else{
+                    paridadActual = "IMPAR";
+                }
+                if(paridadActual == paridadAnterior){
+                    count++
+                    if(count == 3 && paridadActual == "PAR"){
                         console.log("¡Es para bien!");
-                        pares = 0;
+                    }
+                    else if(count == 3 && paridadActual == "IMPAR"){
+                        console.log("¡Qué imparcial!");
                     }
                 }else{
-                    impares++;
-                    if(impares == 3){
-                        console.log("¡Qué imparcial!");
-                        impares = 0;
-                    }
-                }         
+                    paridadAnterior = paridadActual;
+                    count = 1;
+                }
             }
         }
-        parImpar([1,2,1,2,1,2,3,5,3,4,4,6]);
+        parImpar([1,2,3,5,3,4,4,6]);
         //-------------------------------
         console.log("7. Incrementa los Segundos - Dado un array de números arr, agrega 1 a cualquier otro elemento, específicamente a aquellos cuyo índice es impar (arr[1], arr[3], arr[5], etc). Luego, console.log cada valor del array y devuelve arr.");
         function segundos(arr){
