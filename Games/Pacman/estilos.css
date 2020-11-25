@@ -29,7 +29,7 @@ body{
     background-position: center;
     background-size: cover;
 }
-#pacman, #doblePacman{
+#pacman, #pacman2{
     position: absolute;
     width: 20px;
     height: 20px;

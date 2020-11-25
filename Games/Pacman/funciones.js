@@ -10,9 +10,11 @@ var mundo = [
     [2,1,1,1,1,3,1,1,1,1,2],
     [2,2,2,2,2,2,2,2,2,2,2]
 ], pacman = {
-    t: 1,
-    l: 1
-}, doblePacman = {
+    id: "pacman",
+    x: 1,
+    y: 1
+}, pacman2 = {
+    id: "pacman2",
     x: 8,
     y: mundo.length-1
 }, fantasma = {
@@ -41,15 +43,15 @@ function mostrarMundo(){
         salida += "\n</div>";
     }
     //Impresion estructura HTML del mundo
-    //console.groupCollapsed(salida);
+    //console.log(salida);
     document.getElementById("mundo").innerHTML = salida;
 }
 function mostrarPacman(){
-    document.getElementById("pacman").style.left = pacman.l*20+"px";
-    document.getElementById("pacman").style.top = pacman.t*20+"px";
+    document.getElementById("pacman").style.left = pacman.y*20+"px";
+    document.getElementById("pacman").style.top = pacman.x*20+"px";
 
-    document.getElementById("doblePacman").style.left = doblePacman.y*20+"px";
-    document.getElementById("doblePacman").style.top = doblePacman.x*20+"px";
+    document.getElementById("pacman2").style.left = pacman2.y*20+"px";
+    document.getElementById("pacman2").style.top = pacman2.x*20+"px";
 }
 function mostrarFantasma(){
     document.getElementById("fantasma").style.top = fantasma.x*20+"px";
@@ -70,6 +72,7 @@ function mostrarVidas(){
     }  
     document.getElementById("vida").innerHTML = salida;
 }
+
 mostrarMundo();
 mostrarPacman();
 mostrarFantasma();
@@ -80,60 +83,61 @@ mostrarVidas();
 document.onkeydown = function(pm){
     //KeyCode 37 izquierda, 39 derecha, 38 arriba, 40 abajo
     //Pacman
-    if(pm.keyCode == 37 && mundo[pacman.t][pacman.l-1] !=2){
-        pacman.l--;
-        document.getElementById("pacman").style.transform = "rotate(180deg)";
+    if(pm.keyCode == 37 && mundo[pacman.x][pacman.y-1] !=2){
+        pacman.y--;
+        document.getElementById(pacman.id).style.transform = "rotate(180deg)";
     }
-    else if(pm.keyCode == 39 && mundo[pacman.t][pacman.l+1] !=2){
-        pacman.l++;
-        document.getElementById("pacman").style.transform = "rotate(0deg)";
+    else if(pm.keyCode == 39 && mundo[pacman.x][pacman.y+1] !=2){
+        pacman.y++;
+        document.getElementById(pacman.id).style.transform = "rotate(0deg)";
     }    
-    else if(pm.keyCode == 38 && mundo[pacman.t-1][pacman.l] !=2){
-        pacman.t--;
-        document.getElementById("pacman").style.transform = "rotate(270deg)";  
+    else if(pm.keyCode == 38 && mundo[pacman.x-1][pacman.y] !=2){
+        pacman.x--;
+        document.getElementById(pacman.id).style.transform = "rotate(270deg)";  
     }
-    else if(pm.keyCode == 40 && mundo[pacman.t+1][pacman.l] !=2){
-        pacman.t++;
-        document.getElementById("pacman").style.transform = "rotate(90deg)";
+    else if(pm.keyCode == 40 && mundo[pacman.x+1][pacman.y] !=2){
+        pacman.x++;
+        document.getElementById(pacman.id).style.transform = "rotate(90deg)";
     }
 
     //KeyCode: 87 W, 65 A, 83 S, 68 D
-    //doblePacman
-    if(pm.keyCode == 65 && mundo[doblePacman.x][doblePacman.y-1] !=2){
-        doblePacman.y--;
-        document.getElementById("doblePacman").style.transform = "rotate(180deg)";
+    //pacman2
+    if(pm.keyCode == 65 && mundo[pacman2.x][pacman2.y-1] !=2){
+        pacman2.y--;
+        document.getElementById(pacman2.id).style.transform = "rotate(180deg)";
     }
-    else if(pm.keyCode == 68 && mundo[doblePacman.x][doblePacman.y+1] !=2){
-        doblePacman.y++;
-        document.getElementById("doblePacman").style.transform = "rotate(0deg)";
+    else if(pm.keyCode == 68 && mundo[pacman2.x][pacman2.y+1] !=2){
+        pacman2.y++;
+        document.getElementById(pacman2.id).style.transform = "rotate(0deg)";
     }    
-    else if(pm.keyCode == 87 && mundo[doblePacman.x-1][doblePacman.y] !=2){
-        doblePacman.x--;
-        document.getElementById("doblePacman").style.transform = "rotate(270deg)";  
+    else if(pm.keyCode == 87 && mundo[pacman2.x-1][pacman2.y] !=2){
+        pacman2.x--;
+        document.getElementById(pacman2.id).style.transform = "rotate(270deg)";  
     }
-    else if(pm.keyCode == 83 && mundo[doblePacman.x+1][doblePacman.y] !=2){
-        doblePacman.x++;
-        document.getElementById("doblePacman").style.transform = "rotate(90deg)";
+    else if(pm.keyCode == 83 && mundo[pacman2.x+1][pacman2.y] !=2){
+        pacman2.x++;
+        document.getElementById(pacman2.id).style.transform = "rotate(90deg)";
     }
-    
+
     //Coordenadas PacMan
-    console.log("Posicion: mundo["+pacman.t+"]["+pacman.l+"]");
+    console.log("Posicion: mundo["+pacman.x+"]["+pacman.y+"]");
     
     //Obtencion de puntos
-    if(mundo[pacman.t][pacman.l] == 1){
-        mundo[pacman.t][pacman.l] = 0;
+    if(mundo[pacman.x][pacman.y] == 1){
+        mundo[pacman.x][pacman.y] = 0;
         puntos +=10;
         mostrarMundo();
         mostrarPuntos();
     }
-    else if(mundo[pacman.t][pacman.l] == 3){
-        mundo[pacman.t][pacman.l] = 0;
+    else if(mundo[pacman.x][pacman.y] == 3){
+        mundo[pacman.x][pacman.y] = 0;
         puntos +=50;
         mostrarMundo();
         mostrarPuntos();
     }    
     mostrarPacman();
 }
+
 //Movimientos Fantasma
 // 1 izq, 2 Der, 3 Arr, 4 Aba
 function movRandom(){
@@ -154,19 +158,20 @@ function moverFantasma(){
     else if(azar == 4 && mundo[fantasma.x+1][fantasma.y] !=2){
         fantasma.x++;
     }
+
     //Colision con Fantasma
-    if(pacman.t == fantasma.x && pacman.l == fantasma.y){
-        pacman.t = 1;
-        pacman.l = 1; 
+    if(pacman.x == fantasma.x && pacman.y == fantasma.y){
+        pacman.x = 1;
+        pacman.y = 1; 
         document.getElementById("pacman").style.transform = "rotate(0deg)";
+        
         //Perdida de vidas
         if(vidas != 0){
             vidas--;
             mostrarVidas();
         }else{
             location.reload();
-        }
-        
+        }   
     }
     mostrarFantasma();
 }
